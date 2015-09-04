@@ -1,0 +1,14 @@
+en:
+  date:
+    formats:
+      default: '%d-%m-%Y'
+      short: '%d-%m-%y'
+      long: '%e %B %Y'
+      file_no_day: '%Y_%m'
+      file: '%Y_%m_%d'
+      month_name_year: '%B %Y'
+
+  number:
+    currency:
+      format:
+        unit: £

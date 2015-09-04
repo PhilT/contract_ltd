@@ -1,0 +1,136 @@
+- company = 'Electric Visions Ltd'
+- email = 'info@electricvisions.com'
+- address1 = '46 Cypress Grove'
+- address2 = 'Ash Vale'
+- address3 = 'GU12 5QN'
+- company_no = '7369361'
+- vat_no = '141 5526 34'
+- client = 'Havas EHS Ltd'
+- client_address1 = '6 Briset Street'
+- client_address2 = 'London'
+- client_address3 = 'EC1M 5NR'
+- invoice_prefix = 'HAV'
+- rate(480)
+- payment_terms = '14'
+- account_name = 'Phil Thompson'
+- account_sortcode = '40-04-26'
+- account_number = '21523996'
+
+doctype html
+html
+  head
+    meta charset="utf-8"
+    css:
+      body {
+        margin: 20px 55px;
+        font: normal 12px sans-serif;
+        color: #222;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      h2 {
+        font-size: larger;
+      }
+
+      .address {
+        text-align: right;
+        width: 100%;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      thead td {
+        padding-bottom: 10px;
+      }
+
+      td.first {
+        width: 60%;
+        padding-right: 20px;
+        text-align: right;
+      }
+
+      tfoot td {
+        font-weight: bold;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+      ul, li {
+        margin: 0;
+        padding: 0;
+      }
+      ul.account {
+        padding-left: 50px;
+      }
+
+body
+  h1= "#{company} - Invoice"
+
+  aside.address
+    ul
+      li= address1
+      li= address2
+      li= address3
+      li
+      li= email
+      li Company No. #{company_no}
+      li VAT Registration No. #{vat_no}
+
+  p
+    ul
+      li= client
+      li= client_address1
+      li= client_address2
+      li= client_address3
+
+  ul
+    li
+      | Invoice No:
+      strong &nbsp;#{invoice_prefix}#{invoice_num}
+    li
+      | Date:
+      strong &nbsp;#{todays_date}
+
+  p
+    | To:
+    strong &nbsp;#{client}
+
+  h2 Fees:
+
+  table
+    thead
+      tr
+        td.first Ruby Web Development Services provided to #{client} for #{month_year}
+        td #{rate.to_s(:currency, precision: 0)} * #{"%g days" % days}
+    tbody
+      tr
+        td.first Subtotal
+        td= subtotal.to_s(:currency)
+      tr
+        td.first VAT (20%)
+        td= vat.to_s(:currency)
+    tfoot
+      tr
+        td.first Total
+        td= total.to_s(:currency)
+
+  h2 Payment terms
+
+  p Payment within #{payment_terms} days via money transfer only to the following account:
+  ul.account
+    li
+      | Name:
+      strong &nbsp;#{account_name}
+    li
+      | Sort Code:
+      strong &nbsp;#{account_sortcode}
+    li
+      | Account No:
+      strong &nbsp;#{account_number}
+

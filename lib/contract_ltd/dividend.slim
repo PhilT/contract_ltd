@@ -1,0 +1,144 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    css:
+      body {
+        margin: 20px 55px;
+        font-family: Arial;
+        font-size: 14px;
+        color: #111;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: larger;
+      }
+
+      h2 {
+        font-size: larger;
+      }
+
+      p, div {
+        overflow: auto;
+        clear: both;
+        padding-bottom: 10px;
+      }
+
+      div {
+        margin: 30px 0;
+      }
+
+      div.sig {
+        margin-top: 100px;
+      }
+
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+      }
+      table.bordered th, table.bordered td {
+        border: 1px solid black;
+        margin: 0;
+        padding: 5px;
+        text-align: center;
+        max-width: 90px;
+      }
+      td.underline {
+        border-bottom: 1px solid gray;
+        width: 200px;
+        padding-right: 20px;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+
+      ul, li {
+        margin: 0;
+        padding: 0;
+      }
+      li.left {
+        padding-right: 10px;
+        float: left;
+      }
+      li.right {
+        float: right;
+      }
+
+body
+  h1 #{type} Dividend Voucher
+
+  h1 ELECTRIC VISIONS LTD
+
+  div
+    ul
+      li.left
+        strong Date Dividend Paid: #{date_paid}
+      li.right
+        strong Tax Year Ending #{tax_year_end}
+
+  div
+    ul
+      li.left
+        strong Name of Payee:
+      li.left
+        strong Phil Thompson
+
+  div
+    table.bordered
+      thead
+        tr
+          th Date
+          th No. of Shares
+          th Dividend per Share
+          th Gross Dividend
+          th Tax Credit
+          th Net Dividend
+      tbody
+        tr
+          td= date_paid(:short)
+          td= shares
+          td= amount.to_s(:currency)
+          td= gross.to_s(:currency)
+          td= tax_credit.to_s(:currency)
+          td= net.to_s(:currency)
+
+  div
+    small Please keep this dividend voucher in a safe place.
+
+  h2 Minutes of a Board meeting to declare #{article} #{type} Dividend
+
+  ul
+    li Date: #{date_paid}
+    li
+      | Address:&nbsp;
+      - if @date_paid < Date.new(2012, 3, 19)
+        | Flat 54, 94 Walm Lane, Willesden Green NW2 4QA
+      - elsif @date_paid < Date.new(2012, 10, 17)
+        | 128 Oakdale Road, London E11 4DL
+      - else
+        | 46 Cypress Grove, Ash Vale GU12 5QN
+    end
+
+
+  p Present: Phil Thompson
+
+  p The meeting was confirmed as being properly convened and quorate. The interest of the directors who are also shareholders in the matter to be considered was noted and
+
+  p IT WAS RESOLVED THAT:
+
+  p Having regard to the level of distributable reserves shown by the company's figures on its remittance advices that the following dividend may be fully met out of distributable reserves and that immediately thereafter the company will remain in a solvent position, able to pay its debts as they fall due and the interests of creditors not prejudiced.
+
+  p An #{type} Dividend of #{amount.to_s(:currency)} per ordinary share be voted in request of the company year ending on the #{company_year_end}
+
+
+  div.sig
+    table
+      tr
+        td.underline
+        td Phil Thompson
+      tr
+        td
+        td Chairman
+
