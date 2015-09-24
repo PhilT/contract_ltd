@@ -1,10 +1,11 @@
 module ContractLtd
   class Dividend
-    attr_reader :type, :tax_year_end, :shares, :net, :tax_credit, :gross, :amount, :company_year_end
+    attr_reader :type, :article, :tax_year_end, :shares, :net, :tax_credit, :gross, :amount, :company_year_end
 
     def initialize args
       @name = 'dividend'
-      @type = ARGV[0] == 'final' ? 'Final' : 'Interim'
+      @type = ARGV[0]
+      @article = @type == 'final' ? 'a' : 'an'
       @date_paid = Date.parse(ARGV[1])
       @tax_year_end = Date.new(ARGV[2].to_i, 4, 5).to_s(:long)
       @shares = 100
@@ -20,7 +21,7 @@ module ContractLtd
     end
 
     def name(ext)
-      "#{name}.#{ext}"
+      "#{@name}.#{ext}"
     end
 
     def filename
