@@ -19,10 +19,10 @@ def write_timesheet(date)
   (date..date.end_of_month.to_date).each do |d|
     day = working_days(d)
     total += day if day.is_a?(Float)
-    csv += "#{d.day},#{day * 7.5}\n"
+    csv += "#{d.day},#{day * config['hours']}\n"
   end
   csv += "\n"
-  csv += "Total (hours),#{total * 7.5}\n"
+  csv += "Total (hours),#{total * config['hours']}\n"
   csv += "Total (days),#{total}\n"
   File.open(timesheet_filename(date), 'w') {|f| f.write csv }
   total

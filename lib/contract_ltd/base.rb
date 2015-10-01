@@ -20,3 +20,7 @@ def write_pdf(template)
   FileUtils.rm_f(template.name('html'))
 end
 
+def config
+  @config ||= YAML.load(File.read('config.yml'))
+end
+
